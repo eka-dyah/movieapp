@@ -1,0 +1,74 @@
+.Card {
+	position: relative;
+    z-index: 1;
+	width: 310px;
+	height: 170px;
+}
+
+.Card .backdrop {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.Card .inside {
+    position: relative;
+	width: 310px;
+	height: 170px;
+	background-color: #0000009c;
+	color: white;
+}
+
+.Card .inside .content {
+	position: relative;
+	display: flex;
+	align-items: center;
+	width: 310px;
+	height: 150px;
+    padding-top: 10px;
+}
+
+.Card .inside .content .image {
+	position: relative;
+	height: 100%;
+	flex: 2;
+}
+
+.Card .inside .content .image > .image-poster {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
+.Card .inside .content .info > .rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.Card .inside .content .info > .rating > div {
+	font-size: 12px;
+	margin-right: 5px;
+	font-weight: bold;
+}
+
+.Card .inside .content .info > .rating > .image-star-icon {
+	height: 12px;
+}
+
+.Card .inside .content .info {
+	flex: 3;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+.Card .inside .content .info > h4 {
+	text-align: center;
+}
+
+.Card .inside .content .info > p {
+	margin: 10px 0;
+	font-size: 12px;
+}
