@@ -3,6 +3,11 @@
     z-index: 1;
 	width: 310px;
 	height: 170px;
+    cursor: default;
+    margin: 5px;
+	border: 1px solid #aaa;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .Card .backdrop {
@@ -16,8 +21,8 @@
     position: relative;
 	width: 310px;
 	height: 170px;
-	background-color: #0000009c;
-	color: white;
+	background-color: #ffffffbc;
+	color: rgb(0, 0, 0);
 }
 
 .Card .inside .content {
@@ -64,11 +69,27 @@
 	padding: 5px;
 }
 
-.Card .inside .content .info > h4 {
+.Card .inside .content .info > .title {
+    font-weight: bold;
 	text-align: center;
+    margin: 0;
+    padding: 1.2em 0;
+    border-bottom: 2px solid black;
 }
 
 .Card .inside .content .info > p {
 	margin: 10px 0;
 	font-size: 12px;
+}
+
+.Card .click-effect {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.Card .click-effect:active {
+    background-color: rgba(128, 128, 128, 0.398);
 }

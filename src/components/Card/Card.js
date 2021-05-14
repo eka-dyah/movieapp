@@ -24,8 +24,7 @@ const Card = ({ genreSource, movie }) => {
 						/>
 					</div>
 					<div className="info">
-						<h4>{movie.title}</h4>
-						<hr />
+						<p className="title">{movie.title}</p>
 						<p>Genre: {genre.join(", ")}</p>
 						<p>Release: {movie.release_date}</p>
 						<div className="rating">
@@ -39,6 +38,7 @@ const Card = ({ genreSource, movie }) => {
 					</div>
 				</div>
 			</div>
+			<div className="click-effect"></div>
 		</div>
 	);
 };
