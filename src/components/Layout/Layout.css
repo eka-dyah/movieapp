@@ -1,4 +1,13 @@
 .Layout {
     display: flex;
     flex-direction: column;
+    background-color: #444444;
+    justify-content: space-between;
+    min-height: 100vh;
+
+}
+
+.Layout > .content {
+    max-width: 1000px;
+    margin: 10px auto;
 }
