@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 .MovieList .list {
@@ -9,6 +10,7 @@
 }
 
 .MovieList .content {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
