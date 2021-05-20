@@ -1,0 +1,19 @@
+.ButtonGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.ButtonGroup button {
+    padding: 8px 15px;
+    margin: 0;
+    border: none;
+    font-size: 15px;
+}
+
+.ButtonGroup button.button.active {
+    background-color: #00e8ff;
+}
