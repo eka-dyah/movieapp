@@ -3,10 +3,12 @@ import starIcon from "../../assets/star.svg";
 import "./Card.css";
 
 const Card = ({ genreSource, movie }) => {
-	const genre = movie.genre_ids.map((id) => {
-		const find = genreSource.find((gr) => gr.id === id);
-		return find.name;
-	});
+	const genre = genreSource
+		? movie.genre_ids.map((id) => {
+				const find = genreSource.find((gr) => gr.id === id);
+				return find.name;
+		  })
+		: [];
 
 	const posterUrl = "https://image.tmdb.org/t/p/w200" + movie.poster_path;
 	const backdropUrl = "https://image.tmdb.org/t/p/w300" + movie.backdrop_path;
