@@ -1,0 +1,19 @@
+.Footer {
+    padding: 10px 0;
+    width: 100%;
+    background-color: #7b7b7b;
+    color: #313119;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.Footer p {
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.Footer a {
+    color: #313119;
+    text-decoration: underline;
+}
