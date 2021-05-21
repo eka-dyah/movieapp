@@ -1,4 +1,5 @@
 import Card from "../Card/Card";
+import Spinner from "../Spinner/Spinner";
 import "./MovieList.css";
 
 const MovieList = ({
@@ -13,7 +14,7 @@ const MovieList = ({
 	let movieList;
 	let buttonShowMore;
 
-	if (movies && genreList) {
+	if (movies) {
 		movieList = movies.map((movie) => (
 			<div key={movie.id} className="list">
 				<Card movie={movie} genreSource={genreList} />
@@ -22,9 +23,9 @@ const MovieList = ({
 	} else movieList = null;
 
 	if (loading) {
-		buttonShowMore = <p>Loading</p>;
+		buttonShowMore = <Spinner />;
 	} else if (error) {
-		buttonShowMore = <p>Something went wrong</p>;
+		buttonShowMore = <p className="error-message">Something went wrong</p>;
 	} else if (moviesPage < moviesTotalPage) {
 		buttonShowMore = (
 			<button

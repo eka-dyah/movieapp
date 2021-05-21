@@ -37,3 +37,8 @@
 .MovieList button:active {
     background-color: #075f9e;
 }
+
+.MovieList .error-message {
+    color: #ff3e3e;
+    font-weight: bold;
+}
