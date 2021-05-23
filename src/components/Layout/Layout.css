@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     background-color: #444444;
-    color: white;
 }
 
 .Layout > .content {
     min-height: 100vh;
+    color: white;
 }
