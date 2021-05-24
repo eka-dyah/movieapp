@@ -1,0 +1,130 @@
+.MovieBanner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.MovieBanner > .backdrop {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.MovieBanner > .backdrop > img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.MovieBanner > .content {
+    position: relative;
+	width: 100%;
+	height: auto;
+	min-height: 600px;
+	background-color: #101010d1;
+    display: flex;
+}
+
+.MovieBanner > .content > .info {
+	width: 100%;
+	height: 100%;
+	padding: 12px 0 20px 0;
+    margin: auto;
+}
+
+.MovieBanner > .content > .info > .poster {
+	width: 200px;
+	height: 100%;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.MovieBanner > .content > .info > .poster > img {
+	width: 100%;
+	height: 100%;
+}
+
+.MovieBanner > .content > .info > .text {
+	color: #c7c7c7;
+	padding: 0 12px;
+}
+
+.MovieBanner > .content > .info > .text > .title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.MovieBanner > .content > .info > .text > .title > .imdb {
+    width: 80px;
+    height: 40px;
+}
+
+.MovieBanner > .content > .info > .text > .title > .imdb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.MovieBanner a {
+	color: white;
+	text-align: center;
+	text-decoration: underline;
+}
+
+.MovieBanner > .content > .info > .text h1 {
+	margin-bottom: 3px;
+}
+
+.MovieBanner > .content > .info > .text > p {
+	margin: 10px 0;
+	line-height: 1.5;
+}
+
+.MovieBanner > .content > .info > .text > p.overview {
+	margin: 20px 0;
+}
+
+.MovieBanner > .content > .info > .text > .rating {
+	border-top: 1px solid #aaa;
+	padding: 15px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-weight: bold;
+	font-size: 22px;
+}
+
+.MovieBanner > .content > .info > .text > .rating > img {
+	width: 20px;
+	margin-left: 5px;
+}
+
+@media (min-width: 700px) {
+	.MovieBanner > .content > .info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 20px;
+        padding-left: 20px;
+	}
+
+	.MovieBanner > .content > .info > .poster {
+		flex: 1;
+		margin-right: 20px;
+	}
+
+	.MovieBanner > .content > .info > .text {
+		flex: 2;
+	}
+
+    .MovieBanner > .content > .info > .text > .title {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+}

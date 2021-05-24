@@ -1,0 +1,14 @@
+.CreditList {
+    margin-top: 50px;
+    padding: 0 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.CreditList .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
