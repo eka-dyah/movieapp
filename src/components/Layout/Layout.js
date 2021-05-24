@@ -6,7 +6,7 @@ import "./Layout.css";
 const Layout = ({ refSearchBox, onSubmitSearch, children }) => (
 	<div className="Layout">
 		<Header refSearchBox={refSearchBox} onSubmitSearch={onSubmitSearch} />
-		{children}
+		<div className="content">{children}</div>
 		<Footer />
 	</div>
 );
