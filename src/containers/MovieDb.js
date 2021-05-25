@@ -1,432 +1,148 @@
-import Card from "../components/Card/Card";
+import { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout/Layout";
+import FullMovieList from "../components/MovieList/FullMovieList";
+import Carousel from "../shared/Carousel/Carousel";
+import { getMoviesByCategory, getGenreList } from "../utils/fetchData";
 
-const result = [
+const btns = [
 	{
-		adult: false,
-		backdrop_path: "/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
-		genre_ids: [28, 14, 12],
-		id: 460465,
-		original_language: "en",
-		original_title: "Mortal Kombat",
-		overview:
-			"Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
-		popularity: 5358.559,
-		poster_path: "/xGuOF1T3WmPsAcQEQJfnG7Ud9f8.jpg",
-		release_date: "2021-04-07",
-		title: "Mortal Kombat",
-		video: false,
-		vote_average: 7.7,
-		vote_count: 2335,
+		name: "Upcoming",
+		id: "upcoming",
+		active: true,
 	},
 	{
-		adult: false,
-		backdrop_path: "/mYM8x2Atv4MaLulaV0KVJWI1Djv.jpg",
-		genre_ids: [28, 80, 53],
-		id: 804435,
-		original_language: "en",
-		original_title: "Vanquish",
-		overview:
-			"Victoria is a young mother trying to put her dark past as a Russian drug courier behind her, but retired cop Damon forces Victoria to do his bidding by holding her daughter hostage. Now, Victoria must use guns, guts and a motorcycle to take out a series of violent gangsters—or she may never see her child again.",
-		popularity: 4041.227,
-		poster_path: "/AoWY1gkcNzabh229Icboa1Ff0BM.jpg",
-		release_date: "2021-04-16",
-		title: "Vanquish",
-		video: false,
-		vote_average: 6.4,
-		vote_count: 75,
+		name: "Now Playing",
+		id: "now_playing",
+		active: false,
 	},
 	{
-		adult: false,
-		backdrop_path: "/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg",
-		genre_ids: [878, 28, 18],
-		id: 399566,
-		original_language: "en",
-		original_title: "Godzilla vs. Kong",
-		overview:
-			"In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet collide in a spectacular battle for the ages.",
-		popularity: 3621.502,
-		poster_path: "/pgqgaUx1cJb5oZQQ5v0tNARCeBp.jpg",
-		release_date: "2021-03-24",
-		title: "Godzilla vs. Kong",
-		video: false,
-		vote_average: 8.1,
-		vote_count: 5403,
+		name: "Popular",
+		id: "popular",
+		active: false,
 	},
 	{
-		adult: false,
-		backdrop_path: "/6zbKgwgaaCyyBXE4Sun4oWQfQmi.jpg",
-		genre_ids: [28, 53, 80],
-		id: 615457,
-		original_language: "en",
-		original_title: "Nobody",
-		overview:
-			'Hutch Mansell, a suburban dad, overlooked husband, nothing neighbor — a "nobody." When two thieves break into his home one night, Hutch\'s unknown long-simmering rage is ignited and propels him on a brutal path that will uncover dark secrets he fought to leave behind.',
-		popularity: 2861.481,
-		poster_path: "/oBgWY00bEFeZ9N25wWVyuQddbAo.jpg",
-		release_date: "2021-03-26",
-		title: "Nobody",
-		video: false,
-		vote_average: 8.4,
-		vote_count: 1346,
-	},
-	{
-		adult: false,
-		backdrop_path: "/xPpXYnCWfjkt3zzE0dpCNME1pXF.jpg",
-		genre_ids: [16, 28, 12, 14, 18],
-		id: 635302,
-		original_language: "ja",
-		original_title: "劇場版「鬼滅の刃」無限列車編",
-		overview:
-			"Tanjirō Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyōjurō Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
-		popularity: 1519.593,
-		poster_path: "/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
-		release_date: "2020-10-16",
-		title: "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
-		video: false,
-		vote_average: 8.4,
-		vote_count: 900,
-	},
-	{
-		adult: false,
-		backdrop_path: "/9ns9463dwOeo1CK1JU2wirL5Yi1.jpg",
-		genre_ids: [35, 10751, 16],
-		id: 587807,
-		original_language: "en",
-		original_title: "Tom & Jerry",
-		overview:
-			"Tom the cat and Jerry the mouse get kicked out of their home and relocate to a fancy New York hotel, where a scrappy employee named Kayla will lose her job if she can’t evict Jerry before a high-class wedding at the hotel. Her solution? Hiring Tom to get rid of the pesky mouse.",
-		popularity: 625.836,
-		poster_path: "/8XZI9QZ7Pm3fVkigWJPbrXCMzjq.jpg",
-		release_date: "2021-02-11",
-		title: "Tom & Jerry",
-		video: false,
-		vote_average: 7.3,
-		vote_count: 1332,
-	},
-	{
-		adult: false,
-		backdrop_path: "/kf456ZqeC45XTvo6W9pW5clYKfQ.jpg",
-		genre_ids: [10751, 16, 35, 18, 10402, 14],
-		id: 508442,
-		original_language: "en",
-		original_title: "Soul",
-		overview:
-			"Joe Gardner is a middle school teacher with a love for jazz music. After a successful gig at the Half Note Club, he suddenly gets into an accident that separates his soul from his body and is transported to the You Seminar, a center in which souls develop and gain passions before being transported to a newborn child. Joe must enlist help from the other souls-in-training, like 22, a soul who has spent eons in the You Seminar, in order to get back to Earth.",
-		popularity: 551.718,
-		poster_path: "/hm58Jw4Lw8OIeECIq5qyPYhAeRJ.jpg",
-		release_date: "2020-12-25",
-		title: "Soul",
-		video: false,
-		vote_average: 8.3,
-		vote_count: 5959,
-	},
-	{
-		adult: false,
-		backdrop_path: "/k99D5W4qtLK0nuPQSSzCG9FimcD.jpg",
-		genre_ids: [35, 18, 80, 53],
-		id: 556867,
-		original_language: "en",
-		original_title: "Breaking News in Yuba County",
-		overview:
-			"An overlooked pencil-pusher catches her husband in bed with another woman, the shock of which causes him to die of a heart attack. So she buries his body and takes advantage of the growing celebrity status that comes from having a missing husband. But she quickly finds herself in over her head, dodging cops and criminals, all while trying to keep the truth from her sister, a local news anchor who’s desperate for a story.",
-		popularity: 346.398,
-		poster_path: "/pMyCYtgfBmMisX3RFc5eH6zIV5Y.jpg",
-		release_date: "2021-05-20",
-		title: "Breaking News in Yuba County",
-		video: false,
-		vote_average: 0,
-		vote_count: 0,
-	},
-	{
-		adult: false,
-		backdrop_path: "/7TxeZVg2evMG42p0uSbMJpWNQ8A.jpg",
-		genre_ids: [10751, 16, 14],
-		id: 520946,
-		original_language: "en",
-		original_title: "100% Wolf",
-		overview:
-			"Freddy Lupin, heir to a proud family line of werewolves, is in for a shock when on his 14th birthday his first 'warfing' goes awry, turning him into a ferocious poodle. The pack elders give Freddy until the next moonrise to prove he has the heart of a wolf, or risk being cast out forever. With the help of an unlikely ally in a streetwise stray named Batty, Freddy must prove he's 100% Wolf.",
-		popularity: 287.291,
-		poster_path: "/2VrvxK4yxNCU6KVgo5TADJeBEQu.jpg",
-		release_date: "2020-06-26",
-		title: "100% Wolf",
-		video: false,
-		vote_average: 5.8,
-		vote_count: 150,
-	},
-	{
-		adult: false,
-		backdrop_path: "/z2UtGA1WggESspi6KOXeo66lvLx.jpg",
-		genre_ids: [18, 878, 53],
-		id: 520763,
-		original_language: "en",
-		original_title: "A Quiet Place Part II",
-		overview:
-			"Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize that the creatures that hunt by sound are not the only threats that lurk beyond the sand path.",
-		popularity: 221.789,
-		poster_path: "/4q2hz2m8hubgvijz8Ez0T2Os2Yv.jpg",
-		release_date: "2021-05-21",
-		title: "A Quiet Place Part II",
-		video: false,
-		vote_average: 0,
-		vote_count: 0,
-	},
-	{
-		adult: false,
-		backdrop_path: "/2l8Mcy6MD8MoqYmQIuGcKz63Sra.jpg",
-		genre_ids: [18],
-		id: 660943,
-		original_language: "es",
-		original_title: "El olvido que seremos",
-		overview:
-			"Portrays the life of Héctor Abad Gómez, a prominent doctor and human rights activist in the polarized, violent Medellin of the 70s. A family man worried not only for his own children but those of the underprivileged classes as well, his home was imbued with vitality and creativity, the result of an education based on tolerance and love. Nothing could foretell that a terrible cancer would take the life of one of his beloved daughters. Driven by sadness and rage, Héctor devoted himself to the social and political causes of the time. But Medellin's intolerant society would harass him until he was finally silenced.",
-		popularity: 180.518,
-		poster_path: "/cKCVRr3Hvy4MoV2R0tvS31C9wql.jpg",
-		release_date: "2020-08-22",
-		title: "Forgotten We’ll Be",
-		video: false,
-		vote_average: 6.7,
-		vote_count: 5,
-	},
-	{
-		adult: false,
-		backdrop_path: "/70AV2Xx5FQYj20labp0EGdbjI6E.jpg",
-		genre_ids: [28, 80],
-		id: 637649,
-		original_language: "en",
-		original_title: "Wrath of Man",
-		overview:
-			"A cold and mysterious new security guard for a Los Angeles cash truck company surprises his co-workers when he unleashes precision skills during a heist. The crew is left wondering who he is and where he came from. Soon, the marksman's ultimate motive becomes clear as he takes dramatic and irrevocable steps to settle a score.",
-		popularity: 174.746,
-		poster_path: "/YxopfHpsCV1oF8CZaL4M3Eodqa.jpg",
-		release_date: "2021-04-22",
-		title: "Wrath of Man",
-		video: false,
-		vote_average: 7.6,
-		vote_count: 44,
-	},
-	{
-		adult: false,
-		backdrop_path: "/2ZzmfwgvVh2KLH4A8HMzX5TytAc.jpg",
-		genre_ids: [18],
-		id: 598896,
-		original_language: "en",
-		original_title: "Land",
-		overview:
-			"Edee, in the aftermath of an unfathomable event, finds herself unable to stay connected to the world she once knew and in the face of that uncertainty, retreats to the magnificent, but unforgiving, wilds of the Rockies. After a local hunter brings her back from the brink of death, she must find a way to live again.",
-		popularity: 209.793,
-		poster_path: "/6pYhDPzYPGKvDYpxdf0IUE3RDAS.jpg",
-		release_date: "2021-02-12",
-		title: "Land",
-		video: false,
-		vote_average: 7.5,
-		vote_count: 41,
-	},
-	{
-		adult: false,
-		backdrop_path: "/gOvUJzah5i3DMf3mGUjqfcP05tp.jpg",
-		genre_ids: [18, 37],
-		id: 581734,
-		original_language: "en",
-		original_title: "Nomadland",
-		overview:
-			"A woman in her sixties embarks on a journey through the western United States after losing everything in the Great Recession, living as a van-dwelling modern-day nomad.",
-		popularity: 136.639,
-		poster_path: "/66GUmWpTHgAjyp4aBSXy63PZTiC.jpg",
-		release_date: "2021-01-29",
-		title: "Nomadland",
-		video: false,
-		vote_average: 7.3,
-		vote_count: 963,
-	},
-	{
-		adult: false,
-		backdrop_path: "/7HtvmsLrDeiAgDGa1W3m6senpfE.jpg",
-		genre_ids: [12, 16, 10751],
-		id: 681260,
-		original_language: "en",
-		original_title: "Maya the Bee: The Golden Orb",
-		overview:
-			"When Maya, a headstrong little bee, and her best friend Willi, rescue an ant princess they find themselves in the middle of an epic bug battle that will take them to strange new worlds and test their friendship to its limits.",
-		popularity: 142.041,
-		poster_path: "/tMS2qcbhbkFpcwLnbUE9o9IK4HH.jpg",
-		release_date: "2021-01-07",
-		title: "Maya the Bee: The Golden Orb",
-		video: false,
-		vote_average: 7.2,
-		vote_count: 23,
-	},
-	{
-		adult: false,
-		backdrop_path: "/8ChCpCYxh9YXusmHwcE9YzP0TSG.jpg",
-		genre_ids: [35, 80],
-		id: 337404,
-		original_language: "en",
-		original_title: "Cruella",
-		overview:
-			"In 1970s London amidst the punk rock revolution, a young grifter named Estella is determined to make a name for herself with her designs. She befriends a pair of young thieves who appreciate her appetite for mischief, and together they are able to build a life for themselves on the London streets. One day, Estella’s flair for fashion catches the eye of the Baroness von Hellman, a fashion legend who is devastatingly chic and terrifyingly haute. But their relationship sets in motion a course of events and revelations that will cause Estella to embrace her wicked side and become the raucous, fashionable and revenge-bent Cruella.",
-		popularity: 135.643,
-		poster_path: "/hjS9mH8KvRiGHgjk6VUZH7OT0Ng.jpg",
-		release_date: "2021-05-26",
-		title: "Cruella",
-		video: false,
-		vote_average: 0,
-		vote_count: 0,
-	},
-	{
-		adult: false,
-		backdrop_path: "/7JENyUT8ABxcvrcijDBVpdjgCY9.jpg",
-		genre_ids: [53, 27, 9648],
-		id: 602734,
-		original_language: "en",
-		original_title: "Spiral: From the Book of Saw",
-		overview:
-			"Working in the shadow of an esteemed police veteran, brash Detective Ezekiel “Zeke” Banks and his rookie partner take charge of a grisly investigation into murders that are eerily reminiscent of the city’s gruesome past.  Unwittingly entrapped in a deepening mystery, Zeke finds himself at the center of the killer’s morbid game.",
-		popularity: 131.565,
-		poster_path: "/lcyKve7nXRFgRyms9M1bndNkKOx.jpg",
-		release_date: "2021-05-12",
-		title: "Spiral: From the Book of Saw",
-		video: false,
-		vote_average: 7.3,
-		vote_count: 3,
-	},
-	{
-		adult: false,
-		backdrop_path: "/xXHZeb1yhJvnSHPzZDqee0zfMb6.jpg",
-		genre_ids: [28, 53, 80],
-		id: 385128,
-		original_language: "en",
-		original_title: "F9",
-		overview:
-			"Dominic Toretto is leading a quiet life off the grid with Letty and his son, little Brian, but they know that danger always lurks just over their peaceful horizon. This time, that threat will force Dom to confront the sins of his past if he’s going to save those he loves most. His crew joins together to stop a world-shattering plot led by the most skilled assassin and high-performance driver they’ve ever encountered: a man who also happens to be Dom’s forsaken brother, Jakob.",
-		popularity: 113.253,
-		poster_path: "/bOFaAXmWWXC3Rbv4u4uM9ZSzRXP.jpg",
-		release_date: "2021-05-19",
-		title: "F9",
-		video: false,
-		vote_average: 0,
-		vote_count: 0,
-	},
-	{
-		adult: false,
-		backdrop_path: "/bIlWbSEC6rEpld73ahnQgKVjf8Z.jpg",
-		genre_ids: [27, 28, 53],
-		id: 503736,
-		original_language: "en",
-		original_title: "Army of the Dead",
-		overview:
-			"Following a zombie outbreak in Las Vegas, a group of mercenaries take the ultimate gamble: venturing into the quarantine zone to pull off the greatest heist ever attempted.",
-		popularity: 146.321,
-		poster_path: "/x3taBaWfRzw1NIKhEPpKPwKBAOC.jpg",
-		release_date: "2021-05-13",
-		title: "Army of the Dead",
-		video: false,
-		vote_average: 9.5,
-		vote_count: 4,
-	},
-	{
-		adult: false,
-		backdrop_path: "/41HvtWz3RDHfvnSPahWJU8oMgKA.jpg",
-		genre_ids: [53, 18, 28],
-		id: 578701,
-		original_language: "en",
-		original_title: "Those Who Wish Me Dead",
-		overview:
-			"A teenage murder witness finds himself pursued by twin assassins in the Montana wilderness with a survival expert tasked with protecting him - and a forest fire threatening to consume them all.",
-		popularity: 98.988,
-		poster_path: "/xCEg6KowNISWvMh8GvPSxtdf9TO.jpg",
-		release_date: "2021-05-05",
-		title: "Those Who Wish Me Dead",
-		video: false,
-		vote_average: 7.4,
-		vote_count: 10,
-	},
-];
-const genre = [
-	{
-		id: 28,
-		name: "Action",
-	},
-	{
-		id: 12,
-		name: "Adventure",
-	},
-	{
-		id: 16,
-		name: "Animation",
-	},
-	{
-		id: 35,
-		name: "Comedy",
-	},
-	{
-		id: 80,
-		name: "Crime",
-	},
-	{
-		id: 99,
-		name: "Documentary",
-	},
-	{
-		id: 18,
-		name: "Drama",
-	},
-	{
-		id: 10751,
-		name: "Family",
-	},
-	{
-		id: 14,
-		name: "Fantasy",
-	},
-	{
-		id: 36,
-		name: "History",
-	},
-	{
-		id: 27,
-		name: "Horror",
-	},
-	{
-		id: 10402,
-		name: "Music",
-	},
-	{
-		id: 9648,
-		name: "Mystery",
-	},
-	{
-		id: 10749,
-		name: "Romance",
-	},
-	{
-		id: 878,
-		name: "Science Fiction",
-	},
-	{
-		id: 10770,
-		name: "TV Movie",
-	},
-	{
-		id: 53,
-		name: "Thriller",
-	},
-	{
-		id: 10752,
-		name: "War",
-	},
-	{
-		id: 37,
-		name: "Western",
+		name: "Top Rated",
+		id: "top_rated",
+		active: false,
 	},
 ];
 
-const MovieDb = () => (
-	<>
-		<Layout />
-		<Card movie={result[1]} genreSource={genre} />
-	</>
-);
+const MovieDb = () => {
+	const [movies, setMovies] = useState(null);
+	const [moviesCarousel, setMoviesCarousel] = useState(null);
+	const [genres, setGenres] = useState(null);
+	const [moviesPage, setMoviesPage] = useState(1);
+	const [moviesPageTotal, setMoviesPageTotal] = useState(1);
+	const [loading, setLoading] = useState(false);
+	const [loadingAll, setLoadingAll] = useState(false);
+	const [error, setError] = useState(null);
+	const [buttons, setButtons] = useState(btns);
+
+	const showMoreHandler = (pages) => {
+		const category = buttons.filter((button) => button.active);
+		
+		setLoading(true);
+		getMoviesByCategory(category[0].id, pages, (error, data) => {
+			setLoading(false);
+			if (error) {
+				setError("An error has occured");
+			} else {
+				setMovies([...movies, ...data.results]);
+				setMoviesPage(data.page);
+				setMoviesPageTotal(data.total_pages);
+				setError(null);
+			}
+		});
+	};
+
+	const getGenres = () => {
+		getGenreList((error, data) => {
+			if (error) setGenres(null);
+			else setGenres(data.genres);
+		});
+	};
+
+	const getMoviesCarouselData = () => {
+		getMoviesByCategory("popular", 1, (error, data) => {
+			if (error) setMoviesCarousel(null);
+			else
+				setMoviesCarousel(
+					data.results.length >= 5
+						? data.results.slice(0, 5)
+						: data.results.slice(0, data.results.length)
+				);
+		});
+	};
+
+	const getMovies = (id) => {
+		const category = buttons.filter((button) => button.id === id);
+
+		setLoadingAll(true);
+		getMoviesByCategory(category[0].id, 1, (error, data) => {
+			setLoadingAll(false);
+			if (error) {
+				setError("An error has occured");
+				setMovies(null);
+			} else {
+				setMovies(data.results);
+				setMoviesPage(data.page);
+				setMoviesPageTotal(data.total_pages);
+				setError(null);
+			}
+		});
+	};
+
+	const getMoviesRef = useRef();
+	const getGenresRef = useRef();
+	const getMoviesCarouselRef = useRef();
+
+	getMoviesRef.current = getMovies;
+	getGenresRef.current = getGenres;
+	getMoviesCarouselRef.current = getMoviesCarouselData;
+
+	const buttonClickHandler = (id) => {
+		const newButtons = buttons.map((btn) => {
+			const button = { ...btn };
+			button.active = id === button.id;
+			return button;
+		});
+		setButtons(newButtons);
+	};
+
+	useEffect(() => {
+		const cateogryActive = buttons.filter((btn) => btn.active);
+		getMoviesRef.current(cateogryActive[0].id);
+	}, [buttons]);
+
+	useEffect(() => {
+		getGenresRef.current();
+		getMoviesCarouselRef.current();
+	}, []);
+
+	let carouselPart;
+	if (moviesCarousel) {
+		carouselPart = <Carousel movies={moviesCarousel} />;
+	} else carouselPart = null;
+
+	return (
+		<>
+			<Layout>
+				{carouselPart}
+				<FullMovieList
+					movies={movies}
+					moviesPage={moviesPage}
+					moviesTotalPage={moviesPageTotal}
+					genreList={genres}
+					showMoreButton={showMoreHandler}
+					buttonClickHandler={buttonClickHandler}
+					buttons={buttons}
+					loadingAll={loadingAll}
+					loading={loading}
+					error={error}
+				/>
+			</Layout>
+		</>
+	);
+};
 
 export default MovieDb;
