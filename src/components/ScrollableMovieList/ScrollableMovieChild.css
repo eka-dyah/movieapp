@@ -1,0 +1,47 @@
+.ScrollableMovieChild {
+    min-width: 100px;
+    height: auto;
+    margin-right: 6%;
+}
+
+.ScrollableMovieChild .image {
+    width: 100%;
+    position: relative;
+}
+
+.ScrollableMovieChild .image > img {
+    width: 100%;
+}
+
+.ScrollableMovieChild .image .rating {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    font-size: 15px;
+    background-color: #000000d6;
+}
+
+.ScrollableMovieChild .image .rating > img {
+    width: 11px;
+    margin-left: 3px;
+}
+
+.ScrollableMovieChild .text p {
+    font-size: 12px;
+}
+
+.ScrollableMovieChild .text {
+    text-align: center;
+}
+
+.ScrollableMovieChild .text .title {
+    font-size: 12px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.ScrollableMovieChild > .text .rating {
+    margin-top: 7px;
+}

@@ -1,0 +1,17 @@
+.ScrollableMovieList {
+	margin: 85px auto 0 auto;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+
+.ScrollableMovieList .list {
+	display: flex;
+	overflow-x: scroll;
+    padding-bottom: 15px;
+}
+
+.ScrollableMovieChild .text h3 {
+	text-align: center;
+	margin: 3px 0 10px 0;
+	font-size: 16px;
+}
