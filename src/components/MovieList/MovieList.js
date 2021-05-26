@@ -25,7 +25,7 @@ const MovieList = ({
 	if (loading) {
 		buttonShowMore = <Spinner />;
 	} else if (error) {
-		buttonShowMore = <p className="error-message">Something went wrong</p>;
+		buttonShowMore = <p className="error-message">{error || "Something went wrong"}</p>;
 	} else if (moviesPage < moviesTotalPage) {
 		buttonShowMore = (
 			<button
