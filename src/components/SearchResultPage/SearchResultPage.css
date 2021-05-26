@@ -1,0 +1,9 @@
+.SearchResultPage {
+    margin: 20px auto;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.SearchResultPage > .title {
+    margin-bottom: 30px;
+}
