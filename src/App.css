@@ -1,3 +1,43 @@
 .width-1000 {
-  max-width: 1000px;
+	max-width: 1000px;
+}
+
+.text-capitalize {
+	text-transform: capitalize;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-subtitle {
+	text-decoration: underline;
+	margin-bottom: 10px;
+	font-size: 24px;
+	letter-spacing: 2px;
+  	font-weight: bold;
+}
+
+.text-error {
+	color: red;
+	margin: 30px auto;
+}
+
+::-webkit-scrollbar {
+	width: 7px;
+	height: 7px;
+	margin-top: 3px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: #777777;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgb(214, 214, 214);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgb(238, 238, 238);
 }
