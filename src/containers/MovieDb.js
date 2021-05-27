@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import Layout from "../components/Layout/Layout";
 import FullMovieList from "../components/MovieList/FullMovieList";
 import Carousel from "../shared/Carousel/Carousel";
 import { getMoviesByCategory, getGenreList } from "../utils/fetchData";
@@ -115,6 +114,7 @@ const MovieDb = () => {
 	}, [buttons]);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		getGenresRef.current();
 		getMoviesCarouselRef.current();
 	}, []);
@@ -126,7 +126,6 @@ const MovieDb = () => {
 
 	return (
 		<>
-			<Layout>
 				{carouselPart}
 				<FullMovieList
 					movies={movies}
@@ -140,7 +139,6 @@ const MovieDb = () => {
 					loading={loading}
 					error={error}
 				/>
-			</Layout>
 		</>
 	);
 };
