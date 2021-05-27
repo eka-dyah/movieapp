@@ -1,6 +1,13 @@
 .ImageProfile {
 	width: 190px;
     margin: 15px 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.ImageProfile .image {
+	min-height: 104px;
 }
 
 .ImageProfile p {

@@ -3,9 +3,9 @@ import Footer from "../Footer/Footer";
 
 import "./Layout.css";
 
-const Layout = ({ refSearchBox, onSubmitSearch, children }) => (
+const Layout = ({ children }) => (
 	<div className="Layout">
-		<Header refSearchBox={refSearchBox} onSubmitSearch={onSubmitSearch} />
+		<Header />
 		<div className="content">{children}</div>
 		<Footer />
 	</div>

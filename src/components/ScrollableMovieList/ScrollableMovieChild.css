@@ -21,6 +21,7 @@
     text-align: center;
     font-size: 15px;
     background-color: #000000d6;
+    color: white;
 }
 
 .ScrollableMovieChild .image .rating > img {
@@ -34,6 +35,7 @@
 
 .ScrollableMovieChild .text {
     text-align: center;
+    color: white;
 }
 
 .ScrollableMovieChild .text .title {

@@ -12,6 +12,10 @@
     box-shadow: 0px 2px 6px 0px #8e7a4c;
 }
 
+.Header a {
+    color: black;
+}
+
 .Header .search {
     align-items: flex-end;
     justify-content: center;

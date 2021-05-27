@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import starIcon from "../../assets/star.svg";
+import { decimalPlace } from "../../utils/decimalPlace";
 import determineGenres from "../../utils/determineGenres";
 
 import "./Card.css";
@@ -10,34 +12,38 @@ const Card = ({ genreSource, movie }) => {
 	const backdropUrl = "https://image.tmdb.org/t/p/w300" + movie.backdrop_path;
 
 	return (
-		<div className="Card">
-			<img className="backdrop" alt="Rating" src={backdropUrl} />
-			<div className="inside">
-				<div className="content">
-					<div className="image">
-						<img
-							className="image-poster"
-							alt={movie.title}
-							src={posterUrl}
-						/>
-					</div>
-					<div className="info">
-						<p className="title">{movie.title}</p>
-						<p>Genre: {genre.join(", ")}</p>
-						<p>Release: {movie.release_date}</p>
-						<div className="rating">
-							<div>{movie.vote_average}</div>
+		<Link to={`/movie/${movie.id}`}>
+			<div className="Card">
+				{movie.backdrop_path && (
+					<img className="backdrop" alt="Rating" src={backdropUrl} />
+				)}
+				<div className="inside">
+					<div className="content">
+						<div className="image">
 							<img
-								className="image-star-icon"
-								alt="Rating"
-								src={starIcon}
+								className="image-poster"
+								alt={movie.title}
+								src={posterUrl}
 							/>
+						</div>
+						<div className="info">
+							<p className="title">{movie.title}</p>
+							<p>Genre: {genre.join(", ")}</p>
+							<p>Release: {movie.release_date}</p>
+							<div className="rating">
+								<div>{decimalPlace(movie.vote_average)}</div>
+								<img
+									className="image-star-icon"
+									alt="Rating"
+									src={starIcon}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
+				<div className="click-effect"></div>
 			</div>
-			<div className="click-effect"></div>
-		</div>
+		</Link>
 	);
 };
 
