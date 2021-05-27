@@ -22,13 +22,12 @@ const ImageProfile = ({ type, info }) => {
 		: null;
 
 	return (
-		imgUrl && (
 			<div className="ImageProfile">
-				<img className={type} src={imgUrl} alt={info.name} />
+				<div className="image">{imgUrl && <img className={type} src={imgUrl} alt={info.name} />}</div>
 				<p>{info.name}</p>
-				{type === "acting" ? <p className="character">({info.character})</p> : null}
+				<p className="character">{type === "acting" ? `${info.character}` : ""}</p>
+				
 			</div>
-		)
 	);
 };
 
