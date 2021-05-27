@@ -2,6 +2,7 @@ import imageStar from "../../assets/star.svg";
 import imdbLogo from "../../assets/imdb.svg";
 
 import "./MovieBanner.css";
+import { decimalPlace } from "../../utils/decimalPlace";
 
 const MovieBanner = ({ movieDetails }) => {
 	const posterUrl =
@@ -54,7 +55,7 @@ const MovieBanner = ({ movieDetails }) => {
 							Overview: <br /> {movieDetails.overview}
 						</p>
 						<div className="rating">
-							{movieDetails.vote_average}{" "}
+							{decimalPlace(movieDetails.vote_average)}{" "}
 							<img src={imageStar} alt="rating" />
 						</div>
 					</div>
