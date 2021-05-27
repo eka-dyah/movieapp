@@ -41,14 +41,14 @@ const Carousel = ({ movies }) => {
 		}
 	};
 
-	const prevHander = () => {
-		setTranslate(0);
-		if (current === 0) {
-			setCurrent(movies.length - 1);
-		} else {
-			setCurrent(current - 1);
-		}
-	};
+	// const prevHander = () => {
+	// 	setTranslate(0);
+	// 	if (current === 0) {
+	// 		setCurrent(movies.length - 1);
+	// 	} else {
+	// 		setCurrent(current - 1);
+	// 	}
+	// };
 
 	useEffect(() => {
 		autoPlayRef.current = nextHandler;
@@ -99,12 +99,12 @@ const Carousel = ({ movies }) => {
 
 	return (
 		<div className="Carousel">
-			<button className="prev-button" onClick={prevHander}>
+			{/* <button className="prev-button" onClick={prevHander}>
 				<i className="fa fa-arrow-circle-left" aria-hidden="true"></i>
 			</button>
 			<button className="next-button" onClick={nextHandler}>
 				<i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
-			</button>
+			</button> */}
 			<div
 				className="slider"
 				style={{
