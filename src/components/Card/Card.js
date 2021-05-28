@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import starIcon from "../../assets/star.svg";
+import Image from "../../shared/Image/Image";
 import { decimalPlace } from "../../utils/decimalPlace";
 import determineGenres from "../../utils/determineGenres";
 
@@ -20,10 +21,11 @@ const Card = ({ genreSource, movie }) => {
 				<div className="inside">
 					<div className="content">
 						<div className="image">
-							<img
+							<Image
 								className="image-poster"
-								alt={movie.title}
 								src={posterUrl}
+								alt={movie.title}
+								isTherePath={movie.poster_path}
 							/>
 						</div>
 						<div className="info">
